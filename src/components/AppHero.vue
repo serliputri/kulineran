@@ -11,9 +11,9 @@
                 in Your Gadget
               </h2>
               <p>Silahkan pilih makanan favoritemu!</p>
-              <button class="btn btn-lg btn-success">
+              <router-link class="btn btn-lg btn-success" to="/foods">
                 <b-icon-arrow-right></b-icon-arrow-right>Pesan
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -37,9 +37,9 @@
                 in Your Gadget
               </h2>
               <p>Silahkan pilih makanan favoritemu!</p>
-              <button class="btn btn-lg btn-success">
+              <router-link class="btn btn-lg btn-success" to="/foods">
                 <b-icon-arrow-right></b-icon-arrow-right>Pesan
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
