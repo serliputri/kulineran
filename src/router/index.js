@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AppFoods from '../views/AppFoods.vue'
 import AppFoodsDetails from '../views/AppFoodsDetails.vue'
+import AppCart from '../views/AppCart.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,7 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+
   {
     path: '/foods',
     name: 'AppFoods',
@@ -22,6 +24,12 @@ const routes = [
     path: '/foods/:id',
     name: 'AppFoodsDetails',
     component: AppFoodsDetails
+  },
+
+  {
+    path: '/cart',
+    name: 'AppCart',
+    component: AppCart
   },
 
   {
