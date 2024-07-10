@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import AppFoods from '../views/AppFoods.vue'
 import AppFoodsDetails from '../views/AppFoodsDetails.vue'
 import AppCart from '../views/AppCart.vue'
+import AppPesananSukses from '../views/AppPesananSukses.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
     path: '/cart',
     name: 'AppCart',
     component: AppCart
+  },
+
+  {
+    path: '/pesanan-sukses',
+    name: 'AppPesananSukses',
+    component: AppPesananSukses
   },
 
   {

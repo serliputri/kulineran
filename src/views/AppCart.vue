@@ -75,7 +75,9 @@
                     >
                   </td>
                   <td align="center" class="text-danger">
-                    <b-icon-trash @click="hapusKeranjang(keranjang.id)"></b-icon-trash>
+                    <b-icon-trash
+                      @click="hapusKeranjang(keranjang.id)"
+                    ></b-icon-trash>
                   </td>
                 </tr>
 
@@ -91,6 +93,29 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <form class="mt-4" v-on:submit.prevent>
+            <div class="form-group">
+              <label for="nama"> Nama: </label>
+              <input type="text" class="form-control" v-model="pesan.nama" />
+            </div>
+            <div class="form-group">
+              <label for="noMeja"> Nomor Meja: </label>
+              <input type="text" class="form-control" v-model="pesan.noMeja" />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success float-right"
+              @click="checkout"
+            >
+              <b-icon-cart></b-icon-cart>Pesan
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -109,26 +134,45 @@ export default {
   data() {
     return {
       keranjangs: [],
+      pesan: {},
     };
   },
   methods: {
     setKeranjangs(data) {
       this.keranjangs = data;
     },
-    hapusKeranjang(id){
+    hapusKeranjang(id) {
       axios
-      .delete("http://localhost:3000/keranjangs/"+id)
-      .then(() => {
+        .delete("http://localhost:3000/keranjangs/" + id)
+        .then(() => {
           console.log("Berhasil");
 
-      //Update data after delete
-      axios
-      .get("http://localhost:3000/keranjangs")
-      .then((response) => this.setKeranjangs(response.data))
-      .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
-    }
+          //Update data after delete
+          axios
+            .get("http://localhost:3000/keranjangs")
+            .then((response) => this.setKeranjangs(response.data))
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    },
+    checkout() {
+      if (this.pesan.nama && this.pesan.noMeja) {
+        this.pesan.keranjangs = this.keranjangs;
+        axios
+          .post("http://localhost:3000/pesanans", this.pesan)
+          .then(() => {
+            this.keranjangs.map(function (item) {
+              return axios
+                .delete("http://localhost:3000/keranjangs/" + item.id)
+                .catch((error) => console.log(error));
+            });
+
+            this.$router.push({ path: "/pesanan-sukses" });
+            console.log("Sukses Input Pesanan");
+          })
+          .catch((err) => console.log(err));
+      }
+    },
   },
   mounted() {
     axios
